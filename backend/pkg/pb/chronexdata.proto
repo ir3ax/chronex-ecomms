@@ -1,0 +1,449 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "./pkg/pb";
+
+service ChronexAdminProtoService {
+    rpc SaveProduct(SaveProductRequest) returns (SaveProductResponse) {}
+    rpc SaveFreebies(SaveFreebiesRequest) returns (SaveFreebiesResponse) {}
+    rpc SaveReviews(SaveReviewsRequest) returns (SaveReviewsResponse) {}
+    rpc SaveOrder(SaveOrderRequest) returns (SaveOrderResponse) {}
+    rpc SaveHomeImages(SaveHomeImagesRequest) returns (SaveHomeImagesResponse) {}
+    rpc GetAllFreebies (GetAllFreebiesRequest) returns (GetAllFreebiesResponse) {}
+    rpc GetAllFreebiesDropdown (GetAllFreebiesDropdownRequest) returns (GetAllFreebiesDropdownResponse) {}
+    rpc GetAllProduct (GetAllProductRequest) returns (GetAllProductResponse) {}
+    rpc GetAllReviews (GetAllReviewsRequest) returns (GetAllReviewsResponse) {}
+    rpc GetAllOrder (GetAllOrderRequest) returns (GetAllOrderResponse) {}
+    rpc GetAllHomeImages (GetAllHomeImagesRequest) returns (GetAllHomeImagesResponse) {}
+    rpc GetAllFreebiesById (GetAllFreebiesRequestById) returns (GetAllFreebiesResponseById) {}
+    rpc GetAllProductById (GetAllProductRequestById) returns (GetAllProductResponseById) {}
+    rpc GetAllReviewsById (GetAllReviewsRequestById) returns (GetAllReviewsResponseById) {}
+    rpc UpdateFreebies(UpdateFreebiesRequest) returns (UpdateFreebiesResponse) {}
+    rpc UpdateFreebiesQuantity(UpdateFreebiesQuantityRequest) returns (UpdateFreebiesQuantityResponse) {}
+    rpc UpdateFreebiesStatus(UpdateFreebiesStatusRequest) returns (UpdateFreebiesStatusResponse) {}
+    rpc UpdateReviews(UpdateReviewsRequest) returns (UpdateReviewsResponse) {}
+    rpc UpdateReviewsStatus(UpdateReviewsStatusRequest) returns (UpdateReviewsStatusResponse) {}
+    rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse) {}
+    rpc UpdateProductQuantity(UpdateProductQuantityRequest) returns (UpdateProductQuantityResponse) {}
+    rpc UpdateProductStatus(UpdateProductStatusRequest) returns (UpdateProductStatusResponse) {}
+    rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse) {}
+    rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse) {}
+    rpc UpdateHomeImages(UpdateHomeImagesRequest) returns (UpdateHomeImagesResponse) {}
+    rpc DeleteHomeImages (DeleteHomeImagesRequest) returns (DeleteHomeImagesResponse) {}
+
+    rpc GetAllOrderRevenue (GetAllOrderRevenueRequest) returns (GetAllOrderRevenueResponse) {}
+    rpc GetAllTotalOrder (GetAllTotalOrderRequest) returns (GetAllTotalOrderResponse) {}
+    rpc GetBestSellingProducts (GetBestSellingProductsRequest) returns (GetBestSellingProductsResponse) {}
+}
+
+message ProductData {
+    string productId = 1;
+    string productName = 2;
+    string img = 3;
+    double discount = 4;
+    double supplierPrice = 5;
+    double originalPrice = 6;
+    double discountedPrice = 7;
+    string description1 = 8;
+    string description2 = 9;
+    double originalQuantity = 10;
+    double currentQuantity = 11;
+    string productStatus = 12;
+    double productSold = 13;
+    string productFreebies = 14;
+    string createdBy = 15;
+    int64 createdAt = 16;
+    string updatedBy = 17;
+    int64 updatedAt = 18;
+}
+
+message SaveProductRequest {
+    string productName = 1;
+    string img = 2;
+    double discount = 3;
+    double supplierPrice = 4;
+    double originalPrice = 5;
+    double discountedPrice = 6;
+    string description1 = 7;
+    string description2 = 8;
+    double originalQuantity = 9;
+    double currentQuantity = 10;
+    string productStatus = 11;
+    double productSold = 12;
+    string productFreebies = 13;
+}
+
+message SaveProductResponse {
+    ProductData productData = 1;
+}
+
+enum SortOptionProduct {
+    PRODUCT_ATOZ = 0;
+    PRODUCT_ZTOA = 1;
+    PRODUCT_PRICE_HIGH_TO_LOW = 2;
+    PRODUCT_PRICE_LOW_TO_HIGH = 3;
+    PRODUCT_QUANTITY_HIGH_TO_LOW = 4;
+    PRODUCT_QUANTITY_LOW_TO_HIGH = 5;
+    PRODUCT_SUPPLIER_HIGH_TO_LOW = 6;
+    PRODUCT_SUPPLIER_LOW_TO_HIGH = 7;
+}
+
+message GetAllProductRequest {
+    string search = 1;
+    string sortOptionProduct = 2;
+}
+
+message GetAllProductResponse {
+    repeated ProductData productData = 1;
+}
+
+message GetAllProductRequestById {
+    string productId = 1;
+}
+
+message GetAllProductResponseById {
+    repeated ProductData productData = 1;
+}
+
+message UpdateProductRequest {
+    string productId = 1;
+    string productName = 2;
+    string img = 3;
+    double discount = 4;
+    double supplierPrice = 5;
+    double originalPrice = 6;
+    double discountedPrice = 7;
+    string description1 = 8;
+    string description2 = 9;
+    string productStatus = 10;
+    double productSold = 11;
+    string productFreebies = 12;
+}
+
+message UpdateProductResponse {
+    ProductData productData = 1;
+}
+
+message UpdateProductQuantityRequest {
+    string productId = 1;
+    double originalQuantity = 2;
+    double currentQuantity = 3;
+}
+
+message UpdateProductQuantityResponse {
+    ProductData productData = 1;
+}
+
+message UpdateProductStatusRequest {
+    string productId = 1;
+    string productStatus = 2;
+}
+
+message UpdateProductStatusResponse {
+    ProductData productData = 1;
+}
+
+message FreebiesData {
+    string freebiesId = 1;
+    string freebiesName = 2;
+    bytes freebiesImg = 3;
+    double freebiesStorePrice = 4;
+    double freebiesOriginalQuantity = 5;
+    double freebiesCurrentQuantity = 6;
+    string freebiesStatus = 7;
+    string createdBy = 8;
+    int64 createdAt = 9;
+    string updatedBy = 10;
+    int64 updatedAt = 11;
+}
+
+message SaveFreebiesRequest {
+    string freebiesName = 1;
+    bytes freebiesImg = 2;
+    double freebiesStorePrice = 3;
+    double freebiesOriginalQuantity = 4;
+    double freebiesCurrentQuantity = 5;
+    string freebiesStatus = 6;
+}
+
+message SaveFreebiesResponse {
+    FreebiesData freebiesData = 1;
+}
+
+message GetAllFreebiesRequest {
+    string search = 1;
+    string sortOption = 2;
+}
+
+enum SortOption {
+    ATOZ = 0;
+    ZTOA = 1;
+    PRICE_HIGH_TO_LOW = 2;
+    PRICE_LOW_TO_HIGH = 3;
+    QUANTITY_HIGH_TO_LOW = 4;
+    QUANTITY_LOW_TO_HIGH = 5;
+}
+
+message GetAllFreebiesResponse {
+    repeated FreebiesData freebiesData = 1;
+}
+
+message GetAllFreebiesDropdownRequest {
+   
+}
+
+message GetAllFreebiesDropdownResponse {
+    repeated FreebiesData freebiesData = 1;
+}
+
+message GetAllFreebiesRequestById {
+    string freebiesId = 1;
+}
+
+message GetAllFreebiesResponseById {
+    repeated FreebiesData freebiesData = 1;
+}
+
+message UpdateFreebiesRequest {
+    string freebiesId = 1;
+    string freebiesName = 2;
+    bytes freebiesImg = 3;
+    double freebiesStorePrice = 4;
+    string freebiesStatus = 5;
+}
+
+message UpdateFreebiesResponse {
+    FreebiesData freebiesData = 1;
+}
+
+
+message UpdateFreebiesQuantityRequest {
+    string freebiesId = 1;
+    double freebiesOriginalQuantity = 2;
+    double freebiesCurrentQuantity = 3;
+}
+
+message UpdateFreebiesQuantityResponse {
+    FreebiesData freebiesData = 1;
+}
+
+message UpdateFreebiesStatusRequest {
+    string freebiesId = 1;
+    string freebiesStatus = 2;
+}
+
+message UpdateFreebiesStatusResponse {
+    FreebiesData freebiesData = 1;
+}
+
+message ReviewsData {
+    string reviewsId = 1;
+    string productId = 2;
+    string reviewsName = 3;
+    string reviewsSubject = 4;
+    string reviewsMessage = 5;
+    int64 reviewsStarRating = 6;
+    string reviewsStatus = 7;
+    string createdBy = 8;
+    int64 createdAt = 9;
+    string updatedBy = 10;
+    int64 updatedAt = 11;
+}
+
+message SaveReviewsRequest {
+    string productId = 1;
+    string reviewsName = 2;
+    string reviewsSubject = 3;
+    string reviewsMessage = 4;
+    int64 reviewsStarRating = 5;
+    string reviewsStatus = 6;
+}
+
+message SaveReviewsResponse {
+    ReviewsData reviewsData = 1;
+}
+
+enum SortOptionReviews {
+    REVIEWS_ATOZ = 0;
+    REVIEWS_ZTOA = 1;
+    REVIEWS_RATING_HIGH_TO_LOW = 2;
+    REVIEWS_RATING_LOW_TO_HIGH = 3;
+    REVIEWS_DATE_HIGH_TO_LOW = 4;
+    REVIEWS_DATE_LOW_TO_HIGH = 5;
+}
+
+message GetAllReviewsRequest {
+    string search = 1;
+    string sortOptionReviews = 2;
+}
+
+message GetAllReviewsResponse {
+    repeated ReviewsData reviewsData = 1;
+}
+
+message UpdateReviewsRequest {
+    string reviewsId = 1;
+    string productId = 2;
+    string reviewsName = 3;
+    string reviewsSubject = 4;
+    string reviewsMessage = 5;
+    int64 reviewsStarRating = 6;
+}
+
+message UpdateReviewsResponse {
+    ReviewsData reviewsData = 1;
+}
+
+message UpdateReviewsStatusRequest {
+    string reviewsId = 1;
+    string reviewsStatus = 2;
+}
+
+message UpdateReviewsStatusResponse {
+    ReviewsData reviewsData = 1;
+}
+
+message GetAllReviewsRequestById {
+    string reviewsId = 1;
+}
+
+message GetAllReviewsResponseById {
+    repeated ReviewsData reviewsData = 1;
+}
+
+message OrderData {
+    string orderId = 1;
+    string customer = 2;
+    string completeAddress = 3;
+    string product = 4;
+    double total = 5;
+    string orderStatus = 6;
+    string trackingId = 7;
+    string stickyNotes = 8;
+    string createdBy = 9;
+    int64 createdAt = 10;
+    string updatedBy = 11;
+    int64 updatedAt = 12;
+}
+
+message SaveOrderRequest {
+    string customer = 1;
+    string completeAddress = 2;
+    string product = 3;
+    double total = 4;
+    string orderStatus = 5;
+}
+
+message SaveOrderResponse {
+    OrderData orderData = 1;
+}
+
+enum SortOptionOrder {
+    ORDER_ATOZ = 0;
+    ORDER_ZTOA = 1;
+    ORDER_DATE_HIGH_TO_LOW = 2;
+    ORDER_DATE_LOW_TO_HIGH = 3;
+}
+
+message GetAllOrderRequest {
+    string search = 1;
+    string sortOptionOrder = 2;
+    string orderStatus = 3;
+}
+
+message GetAllOrderResponse {
+    repeated OrderData orderData = 1;
+}
+
+message UpdateOrderRequest {
+    string orderId = 1;
+    string customer = 2;
+    string completeAddress = 3;
+    string product = 4;
+    double total = 5;
+    string orderStatus = 6;
+    string trackingId = 7;
+    string stickyNotes = 8;
+}
+
+message UpdateOrderResponse {
+    OrderData orderData = 1;
+}
+
+message UpdateOrderStatusRequest {
+    string orderId = 1;
+    string orderStatus = 2;
+}
+
+message UpdateOrderStatusResponse {
+    OrderData orderData = 1;
+}
+
+message GetAllOrderRevenueRequest {
+    string orderStatus = 2;
+}
+
+message GetAllOrderRevenueResponse {
+    string currentData = 1;
+    string previousData = 2;
+}
+
+message GetAllTotalOrderRequest {
+    string orderStatus = 2;
+}
+
+message GetAllTotalOrderResponse {
+    string currentData = 1;
+    string previousData = 2;
+}
+
+message GetBestSellingProductsRequest {
+    string orderStatus = 1;
+}
+
+message GetBestSellingProductsResponse {
+    string bestSellingProducts = 1;
+}
+
+
+message HomeImagesData {
+    string homeImagesId = 1;
+    string homeImg = 2;
+    string createdBy = 3;
+    int64 createdAt = 4;
+    string updatedBy = 5;
+    int64 updatedAt = 6;
+}
+
+message SaveHomeImagesRequest {
+    string homeImg = 1;
+}
+
+message SaveHomeImagesResponse {
+    HomeImagesData homeImagesData = 1;
+}
+
+message GetAllHomeImagesRequest {
+}
+
+message GetAllHomeImagesResponse {
+    repeated HomeImagesData homeImagesData = 1;
+}
+
+message UpdateHomeImagesRequest {
+    string homeImagesId = 1;
+    string homeImg = 2;
+}
+
+message UpdateHomeImagesResponse {
+    HomeImagesData homeImagesData = 1;
+}
+
+message DeleteHomeImagesRequest {
+    string homeImagesId = 1;
+}
+
+message DeleteHomeImagesResponse {
+    HomeImagesData homeImagesData = 1;
+}
